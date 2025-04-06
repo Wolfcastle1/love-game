@@ -14,20 +14,15 @@ function SetColor(colorName, ...)
 
     if #args == 1 then
         colorOffset = args[1] / 256
-        print("Setting color Ofset: ", colorOffset)
     end
 
     local red = colorVal[1] / 256
-    if #args == 1 then
-        print("red original ", red)
-    end
+
     local green = colorVal[2] / 256
     local blue = colorVal[3] / 256
 
     red = applyColorOffset(red, colorOffset)
-    if #args == 1 then
-        print("new red: ", applyColorOffset(red, colorOffset))
-    end
+
     green = applyColorOffset(green, colorOffset)
     blue = applyColorOffset(blue, colorOffset)
 

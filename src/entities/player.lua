@@ -144,7 +144,6 @@ function Player:setPlayersDirectionFacing(dx, dy)
 end
 
 function Player:isMoving()
-    -- print("dx", self.dx, " / dy:", self.dy)
     if self.dx == 0 and self.dy == 0 then
         return false
     end
@@ -154,11 +153,9 @@ end
 -- determines tile location based on x,y coordinates and tileSize
 function Player:currentTileX()
     local xTile = math.floor(self.x / TILE_SIZE) + 1
-    -- print("Xtile: ", xTile)
     return xTile
 end
 function Player:currentTileY()
     local yTile = math.floor(self.y / TILE_SIZE) + 1
-    -- print("Ytile: ", yTile)
     return yTile
 end

@@ -38,7 +38,6 @@ function DestroyCoins(coins)
     for i, coin in ipairs(coins) do
         if coin.destroy == true then
             table.remove(coins, i)
-            print("Removed Coin: x-" .. coin.x .. " y-" .. coin.y)
         end
     end
 end

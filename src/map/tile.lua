@@ -33,7 +33,6 @@ function Tile:draw()
 
     if self.subject then
         SetColor(tileColorMap[self.type], 100)
-        print("Subject Tile: ", self.xi, self.yi )
     end
 
     ResetColor()
