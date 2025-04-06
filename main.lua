@@ -1,19 +1,22 @@
-require("player")
-local Coin = require("coin")
-local Wall = require("wall")
-local Actions = require("actions")
-local Button = require("gui/button")
-require("map/tile")
-require("assets/colorUtils")
-require("utilities")
-require("map/tileMaps")
-require("map/smartTileMap")
+require("src/entities/player")
+
+require("src/items/coin")
+
+require("src/gui/button")
+
+require("src/util/actions")
+require("src/util/utilities")
+require("src/util/colorUtils")
+
+require("src/map/tile")
+require("src/map/tileMaps")
+require("src/map/smartTileMap")
+
+require("src/items/item")
 
 
 local player
 local coins
-local walls
-local buttons
 
 DEV_TOOLS_ENABLED = true
 local PLAYER_SPEED = 150
@@ -66,8 +69,6 @@ function love.draw()
     RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY())
     -- RenderList(boundaries)
     RenderList(coins)
-    -- RenderList(walls)
-    -- RenderList(buttons)
     RenderRigidTileMap(rigidMap)
     player:draw()
 end
