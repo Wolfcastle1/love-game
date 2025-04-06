@@ -17,9 +17,9 @@ busted
 --- 
 ## Logging:
 ```
--- Will log at-and-above the level set
 log:error("")
 log:warn("")
 log:info("")
 log:debug("")
 ```
+- Will log at-and-above the level set
