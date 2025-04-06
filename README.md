@@ -13,3 +13,13 @@ luarocks install busted
 busted 
 ```
 - this will run all tests in the `spec/` directory with the suffix `..._spec.lua`
+
+--- 
+## Logging:
+```
+-- Will log at-and-above the level set
+log:error("")
+log:warn("")
+log:info("")
+log:debug("")
+```
