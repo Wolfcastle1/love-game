@@ -14,6 +14,9 @@ require("src/map/smartTileMap")
 
 require("src/items/item")
 
+require("src/core/log")
+
+log = log:new(3)
 
 local player
 local coins
@@ -26,6 +29,11 @@ local rigidMap
 local currentMap
 
 function love.load()
+
+    log:error("test")
+    log:warn("test")
+    log:info("test")
+    log:debug("test")
 
     love.window.setTitle("Sam's Sandbox")
 
