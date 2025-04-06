@@ -94,20 +94,18 @@ function canMakeMovement(rigidTileMap, newX, newY)
         for j, val in ipairs(row) do
 
             -- is the tile rigid? Will the player intersect it?
-            if val and willSubjectIntersectTile(Tile:new(0, j-1, i-1), Player:new(newX, newY, 0)) then
-                -- print("hit")
+            if val and doesSubjectIntersectTile(Tile:new(0, j-1, i-1), Player:new(newX, newY, 0)) then
                 return false -- dont allow the movement
             end
 
         end
     end
 
-    -- print("ur good")
     return true -- allow the movement
 
 end
 
-function willSubjectIntersectTile(tile, subject)
+function doesSubjectIntersectTile(tile, subject)
     local leftBetween = subject:leftLimit() > tile:leftLimit() and subject:leftLimit() < tile:rightLimit()
     local rightBetween = subject:rightLimit() > tile:leftLimit() and subject:rightLimit() < tile:rightLimit()
     local topBetween = subject:topLimit() > tile:topLimit() and subject:topLimit() < tile:bottomLimit()
