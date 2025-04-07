@@ -1,4 +1,4 @@
-local utilities = require("utilities")
+local utilities = require("src/util/utilities")
 
 describe("Movement Tests: ", function() 
     
