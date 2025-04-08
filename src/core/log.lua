@@ -15,13 +15,13 @@ end
 
 function log:error(message)  
     if self.level >= 0 then 
-        print("ERROR: ", message)
+        print("\27[31mERROR\27[0m: ", message)
     end
 end
 
 function log:warn(message)  
     if self.level >= 1 then 
-        print("WARN: ", message)
+        print("\27[33mWARN\27[0m: ", message)
     end
 end
 
