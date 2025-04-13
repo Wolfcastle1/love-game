@@ -30,11 +30,11 @@ local currentMap
 
 function love.load()
 
-    log:error("test")
-    log:warn("test")
-    log:info("test")
-    log:debug("test")
-    log:trace("test")
+    log:error("ENABLED")
+    log:warn("ENABLED")
+    log:info("ENABLED")
+    log:debug("ENABALED")
+    log:trace("ENABLED")
 
     love.window.setTitle("Sam's Sandbox")
 
