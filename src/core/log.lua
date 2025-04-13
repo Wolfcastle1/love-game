@@ -14,32 +14,32 @@ function log:new(level)
     return obj
 end
 
-function log:error(message)  
+function log:error(...)  
     if self.level >= 0 then 
-        print("\27[31mERROR\27[0m: ", message)
+        print("\27[31mERROR\27[0m: ", ...)
     end
 end
 
-function log:warn(message)  
+function log:warn(...)  
     if self.level >= 1 then 
-        print("\27[33mWARN\27[0m: ", message)
+        print("\27[33mWARN\27[0m: ", ...)
     end
 end
 
-function log:info(message)
+function log:info(...)
     if self.level >= 2 then 
-        print("INFO: ", message)
+        print("INFO: ", ...)
     end
 end
 
-function log:debug(message)  
+function log:debug(...)  
     if self.level >= 3 then 
-        print("DEBUG: ", message)
+        print("DEBUG: ", ...)
     end
 end
 
-function log:trace(message)  
+function log:trace(...)  
     if self.level >= 4 then 
-        print("TRACE: ", message)
+        print("TRACE: ", ...)
     end
 end
