@@ -4,6 +4,7 @@ log = {}
 -- 1 warn 
 -- 2 info 
 -- 3 debug 
+-- 4 trace
 
 function log:new(level)
 
@@ -34,5 +35,11 @@ end
 function log:debug(message)  
     if self.level >= 3 then 
         print("DEBUG: ", message)
+    end
+end
+
+function log:trace(message)  
+    if self.level >= 4 then 
+        print("TRACE: ", message)
     end
 end
