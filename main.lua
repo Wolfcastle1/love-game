@@ -33,7 +33,7 @@ function love.load()
     log:error("ENABLED")
     log:warn("ENABLED")
     log:info("ENABLED")
-    log:debug("ENABALED")
+    log:debug("ENABLED")
     log:trace("ENABLED")
 
     love.window.setTitle("Sam's Sandbox")
