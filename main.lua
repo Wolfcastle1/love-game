@@ -16,7 +16,7 @@ require("src/items/item")
 
 require("src/core/log")
 
-log = log:new(3)
+log = log:new(4)
 
 local player
 local coins
@@ -34,6 +34,7 @@ function love.load()
     log:warn("test")
     log:info("test")
     log:debug("test")
+    log:trace("test")
 
     love.window.setTitle("Sam's Sandbox")
 
