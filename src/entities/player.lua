@@ -57,6 +57,8 @@ function Player:draw()
     -- todo what happens when the second size is gone?
     SetColor("white")
     love.graphics.circle("fill", self.x, self.y, self.size)
+    SetColor("black")
+    love.graphics.circle("line", self.x, self.y, self.size)
     ResetColor()
 
     if DevToolsEnabled() then

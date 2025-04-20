@@ -8,6 +8,7 @@ function Resource:new(name, amount, location)
 
     obj.name = name
     obj.amount = amount
+    obj.location = location
 
     setmetatable(obj, self)
     self.__index = self 

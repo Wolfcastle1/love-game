@@ -6,13 +6,15 @@ require("src/gui/button")
 require("src/util/actions")
 require("src/util/utilities")
 require("src/util/colorUtils")
-require("src/util/location")
+Location = require("src/util/location")
 
 require("src/map/tile")
 require("src/map/tileMaps")
 require("src/map/smartTileMap")
 
 require("src/items/item")
+require("src/items/resources/resource")
+require("src/items/resources/metal")
 
 require("src/core/log")
 
@@ -20,6 +22,7 @@ log = log:new(4)
 
 local player
 local coins
+local resources
 
 DEV_TOOLS_ENABLED = true
 local PLAYER_SPEED = 150
@@ -53,6 +56,10 @@ function love.load()
         Coin:new(400, 300, 3),
     }
 
+    resources = { 
+        Metal:new(10, Location.new(300,300)), 
+    }
+
 end
 
 
@@ -78,6 +85,7 @@ function love.draw()
     RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY())
     -- RenderList(boundaries)
     RenderList(coins)
+    RenderList(resources)
     RenderRigidTileMap(rigidMap)
     player:draw()
 end

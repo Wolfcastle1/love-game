@@ -32,3 +32,5 @@ end
 function Location.toString(loc)
     return "(" .. loc.x .. ", " .. loc.y .. ")"
 end
+
+return Location
