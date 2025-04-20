@@ -1,5 +1,4 @@
 require("src/entities/player")
-
 require("src/items/coin")
 
 require("src/gui/button")
@@ -7,6 +6,7 @@ require("src/gui/button")
 require("src/util/actions")
 require("src/util/utilities")
 require("src/util/colorUtils")
+require("src/util/location")
 
 require("src/map/tile")
 require("src/map/tileMaps")
