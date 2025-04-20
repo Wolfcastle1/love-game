@@ -4,7 +4,9 @@ local colorMap = {
     green = {20, 100, 20},
     hRed = {256, 10, 10},
     black = {0, 0, 0},
+    black1 = {20, 20, 20},
     white = {256, 256, 256},
+
 }
 
 function SetColor(colorName, ...)

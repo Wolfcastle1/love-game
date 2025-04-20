@@ -6,6 +6,7 @@ require("src/gui/button")
 require("src/util/actions")
 require("src/util/utilities")
 require("src/util/colorUtils")
+require("src/util/itemUtils")
 Location = require("src/util/location")
 
 require("src/map/tile")
@@ -18,7 +19,7 @@ require("src/items/resources/metal")
 
 require("src/core/log")
 
-log = log:new(4)
+log = log:new(3)
 
 local player
 local coins
@@ -75,8 +76,17 @@ function love.update(dt)
         coin:update(dt)
     end
 
+    for i, resource in ipairs(resources) do
+        resource:update(dt)
+    end
+
+
     DetectCoinCollections(player, coins)
     DestroyCoins(coins)
+
+    DetectItemCollections(player, resources)
+    DestroyItems(resources)
+
 end
 
 

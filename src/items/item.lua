@@ -10,6 +10,11 @@ function Item:new(type, location)
     return obj
 end
 
-function Item:pickup()
+function Item:collect()
+    log:debug("Collecting ", self.name)
+    self.collected = true
+end
+
+function Item:remove()
     self.location = nil
 end
