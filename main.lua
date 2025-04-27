@@ -81,6 +81,9 @@ end
 function love.draw()
 
     RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY())
+
+    DrawHUD()
+
     -- RenderList(boundaries)
     RenderList(resources)
     RenderRigidTileMap(rigidMap)
@@ -96,3 +99,7 @@ end
 function Render(obj)
     obj:draw()
 end
+
+function DrawHUD()
+    love.graphics.print("Gold: " .. player.gold, 750, 10)
+end 
