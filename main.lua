@@ -63,7 +63,9 @@ function love.update(dt)
     player:update(dt, rigidMap)
 
 
-
+    if #resources < 1 then 
+        table.insert(resources, Gold:new(10, Location.new(500,500)))
+    end
     
 
     for i, resource in ipairs(resources) do

@@ -11,6 +11,7 @@ function Player:new(x, y, speed)
     dy = 0,
     xfacing = "",
     yfacing = "",
+    gold = 0
     }
     setmetatable(obj, self)
     self.__index = self
