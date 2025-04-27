@@ -1,8 +1,8 @@
-Metal  = setmetatable({}, { __index = Resource })  -- Inherit from Item
-Metal.__index = Metal
+Gold  = setmetatable({}, { __index = Resource })  -- Inherit from Item
+Gold.__index = Gold
 
-function Metal:new(amount, location)
-    local obj = Resource:new("Metal", amount, location)
+function Gold:new(amount, location)
+    local obj = Resource:new("Gold", amount, location)
 
     obj.size = amount
     
@@ -10,14 +10,14 @@ function Metal:new(amount, location)
     return obj
 end
 
-function Metal:draw()
+function Gold:draw()
 
 
-    log:trace("Metal Location: ", Location.toString(self.location))
+    log:trace("Gold Location: ", Location.toString(self.location))
     if self.location then
         local coinOffset = 4
 
-        log:trace("Printing Metal Item:")
+        log:trace("Printing Gold Item:")
         SetColor("gold")
         love.graphics.circle("fill", self.location.x, self.location.y, self.size, self.size)
         SetColor("black1")
@@ -35,7 +35,7 @@ function Metal:draw()
 end
 
 
-function Metal:update(dt)
+function Gold:update(dt)
     if self.collected == true then
         if self.size > 0 then
             self.size = self.size - 1;

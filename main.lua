@@ -14,7 +14,7 @@ require("src/map/smartTileMap")
 
 require("src/items/item")
 require("src/items/resources/resource")
-require("src/items/resources/metal")
+require("src/items/resources/gold")
 
 require("src/core/log")
 
@@ -51,7 +51,7 @@ function love.load()
 
 
     resources = { 
-        Metal:new(10, Location.new(300,300)), 
+        Gold:new(10, Location.new(300,300)), 
     }
 
 end
