@@ -21,26 +21,6 @@ function IsCircularCollide(x1, y1, r1, x2, y2, r2, buffer)
     return distance < r1 + r2 + buffer
 end
 
-function DoesPlayerCollectCoin(player, coin)
-    local coinCollectBuffer = 20
-    return IsCircularCollide(player.x, player.y, player.size, coin.x, coin.y, coin.size, coinCollectBuffer)
-end
-
-function DetectCoinCollections(player, coins)
-    for i, coin in ipairs(coins) do 
-        if DoesPlayerCollectCoin(player, coin) then
-            coin:collect()
-        end
-    end
-end
-
-function DestroyCoins(coins)
-    for i, coin in ipairs(coins) do
-        if coin.destroy == true then
-            table.remove(coins, i)
-        end
-    end
-end
 
 function ResetColor() 
     love.graphics.setColor(1,1,1)

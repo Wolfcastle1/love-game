@@ -1,6 +1,6 @@
 function DoesPlayerCollectItem(player, item)
-    local coinCollectBuffer = 20
-    return IsCircularCollide(player.x, player.y, player.size, item.location.x, item.location.y, item.size, coinCollectBuffer)
+    local collectBuffer = 20
+    return IsCircularCollide(player.x, player.y, player.size, item.location.x, item.location.y, item.size, collectBuffer)
 end
 
 function DetectItemCollections(player, items)

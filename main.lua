@@ -1,5 +1,4 @@
 require("src/entities/player")
-require("src/items/coin")
 
 require("src/gui/button")
 
@@ -22,7 +21,6 @@ require("src/core/log")
 log = log:new(3)
 
 local player
-local coins
 local resources
 
 DEV_TOOLS_ENABLED = true
@@ -51,11 +49,6 @@ function love.load()
 
     player = Player:new(150, 150, PLAYER_SPEED)
 
-    coins = {
-        Coin:new(200, 200, 3),
-        Coin:new(300, 400, 3),
-        Coin:new(400, 300, 3),
-    }
 
     resources = { 
         Metal:new(10, Location.new(300,300)), 
@@ -71,18 +64,11 @@ function love.update(dt)
 
 
 
-    -- all coin objs 
-    for i, coin in ipairs(coins) do
-        coin:update(dt)
-    end
+    
 
     for i, resource in ipairs(resources) do
         resource:update(dt)
     end
-
-
-    DetectCoinCollections(player, coins)
-    DestroyCoins(coins)
 
     DetectItemCollections(player, resources)
     DestroyItems(resources)
@@ -94,7 +80,6 @@ function love.draw()
 
     RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY())
     -- RenderList(boundaries)
-    RenderList(coins)
     RenderList(resources)
     RenderRigidTileMap(rigidMap)
     player:draw()
