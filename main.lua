@@ -16,11 +16,15 @@ require("src/items/item")
 require("src/items/resources/resource")
 require("src/items/resources/gold")
 
+require("src/props/prop")
+require("src/props/dynamic/piggyBank")
+
 require("src/core/log")
 
 log = log:new(3)
 
 local player
+local piggyBank
 local resources
 
 DEV_TOOLS_ENABLED = true
@@ -48,7 +52,7 @@ function love.load()
 
 
     player = Player:new(150, 150, PLAYER_SPEED)
-
+    piggyBank = PiggyBank:new(Location.new(100, 100), 90)
 
     resources = { 
         Gold:new(10, Location.new(300,300)), 
@@ -87,6 +91,9 @@ function love.draw()
     -- RenderList(boundaries)
     RenderList(resources)
     RenderRigidTileMap(rigidMap)
+
+    piggyBank:draw()
+
     player:draw()
 end
 

@@ -7,7 +7,7 @@ function DetectItemCollections(player, items)
     for i, item in ipairs(items) do 
         if DoesPlayerCollectItem(player, item) then
             item:collect()
-            log:debug("Player had ", player.gold, " gold")
+            log:trace("Player had ", player.gold, " gold")
             player.gold = player.gold + 1
             log:debug("Player has ", player.gold, " gold now")
         end
