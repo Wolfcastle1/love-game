@@ -52,7 +52,7 @@ function love.load()
 
 
     player = Player:new(150, 150, PLAYER_SPEED)
-    piggyBank = PiggyBank:new(Location.new(100, 100), 90)
+    piggyBank = PiggyBank:new(Location.new(2, 2), 0)
 
     resources = { 
         Gold:new(10, Location.new(300,300)), 
@@ -92,7 +92,7 @@ function love.draw()
     RenderList(resources)
     RenderRigidTileMap(rigidMap)
 
-    piggyBank:draw()
+    Render(piggyBank)
 
     player:draw()
 end

@@ -2,6 +2,9 @@ PiggyBank = setmetatable({}, {__index = Prop})
 PiggyBank.__index = PiggyBank
 
 local img = love.graphics.newImage("src/assets/props/bank.png")
+img:setFilter("nearest", "nearest")
+local scale = TILE_SIZE / img:getWidth()
+
 
 function PiggyBank:new(location, rotation)
     local obj = Prop:new("PiggyBank")
@@ -14,8 +17,6 @@ function PiggyBank:new(location, rotation)
 end
 
 function PiggyBank:draw()
-    love.graphics.rotate(math.rad(self:rotationDegree()))
-    love.graphics.draw(img, self.location.x, self.location.y, 0, 10, 10)
-    love.graphics.origin()
+    love.graphics.draw(img, self.location.x*TILE_SIZE, self.location.y*TILE_SIZE, math.rad(self:rotationDegree()), scale, scale, 0, 0)
 end
 
