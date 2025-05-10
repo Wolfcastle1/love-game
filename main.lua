@@ -52,7 +52,7 @@ function love.load()
 
 
     player = Player:new(150, 150, PLAYER_SPEED)
-    piggyBank = PiggyBank:new(Location.new(2, 2), 0)
+    piggyBank = PiggyBank:new(Location.new(2, 2), 1)
 
     resources = { 
         Gold:new(10, Location.new(300,300)), 
