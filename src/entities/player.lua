@@ -23,8 +23,6 @@ function Player:update(dt, rMap)
     local dx = 0
     local dy = 0
 
-    self:currentTileX()
-    self:currentTileY()
 
     if love.keyboard.isDown("right") or love.keyboard.isDown("d") then
         dx = dx + self.speed*dt
