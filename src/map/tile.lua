@@ -10,15 +10,15 @@ local tileColorMap = {
 
 function Tile:new(type, xi, yi, ...)
     local args = {...}
-    local subject = false
+    local isCurrent = false
     if #args == 1 then
-        subject = args[1]
+        isCurrent = args[1]
     end
     local obj = {
         type = type,
         xi = xi,
         yi = yi, 
-        subject = subject
+        isCurrent = isCurrent
     }
     setmetatable(obj, self)
     self.__index = self
@@ -31,14 +31,9 @@ function Tile:draw()
 
     love.graphics.rectangle("fill", self.xi*TILE_SIZE, self.yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
 
-    if self.subject then
-        SetColor(tileColorMap[self.type], 100)
-    end
-
     ResetColor()
 
-    if self.subject then
-
+    if self.isCurrent and DevToolsEnabled() then
         SetColor("black")
         love.graphics.rectangle("line", self.xi*TILE_SIZE, self.yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
         ResetColor()
