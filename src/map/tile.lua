@@ -10,15 +10,18 @@ local tileColorMap = {
 
 function Tile:new(type, xi, yi, ...)
     local args = {...}
-    local isCurrent = false
+    local debugOnly = false
+    local specialTile = false
     if #args == 1 then
-        isCurrent = args[1]
+        debugOnly = args[1]
+        specialTile = true
     end
     local obj = {
         type = type,
         xi = xi,
         yi = yi, 
-        isCurrent = isCurrent
+        debugOnly = debugOnly,
+        specialTile = specialTile
     }
     setmetatable(obj, self)
     self.__index = self
@@ -31,13 +34,12 @@ function Tile:draw()
 
     love.graphics.rectangle("fill", self.xi*TILE_SIZE, self.yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
 
-    ResetColor()
-
-    if self.isCurrent and DevToolsEnabled() then
+    if (self.specialTile) and (not self.debugOnly or (self.debugOnly and DevToolsEnabled())) then
         SetColor("black")
         love.graphics.rectangle("line", self.xi*TILE_SIZE, self.yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
         ResetColor()
     end
+
 end
 
 function Tile:leftLimit()

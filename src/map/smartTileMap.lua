@@ -26,28 +26,24 @@ function ParseBasicTileMap(numMap)
 
 end
 
-function RenderSmartTileMap(map, ...)
-
-    local args = {...}
-
+function RenderSmartTileMap(map, currentX, currentY, focusX, focusY)
 
     for rowIndex, row in ipairs(map) do
         for colIndex, col in ipairs(row) do
             local selectedTile = map[rowIndex][colIndex]
-            if #args == 2 then
-                if colIndex == args[1] and rowIndex == args[2] then
-                    Render(Tile:new(selectedTile.type, selectedTile.xi, selectedTile.yi, true))
-                end
-            end
             Render(selectedTile)
         end
     end
 
+    log:trace("focusX ", focusX)
+    log:trace("focusY ", focusY)
+
+
     -- render selected tile
-    if #args == 2 then
-        local specialTile = map[args[2]][args[1]]
-        Render(Tile:new(specialTile.type, specialTile.xi, specialTile.yi, true))
-    end
+    local currentTile = map[currentY][currentX]
+    local focusTile = map[focusY][focusX]
+    Render(Tile:new(currentTile.type, currentTile.xi, currentTile.yi, true))
+    Render(Tile:new(focusTile.type, focusTile.xi, focusTile.yi, false))
 end
 
 return SmartTileMap

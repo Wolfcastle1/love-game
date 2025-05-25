@@ -89,7 +89,7 @@ end
 
 function love.draw()
 
-    RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY())
+    RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY(), player:getFocusX(), player:getFocusY())
 
     DrawHUD()
 

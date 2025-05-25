@@ -9,8 +9,8 @@ function Player:new(x, y, speed)
     size = 20,
     dx = 0,
     dy = 0,
-    xfacing = "",
-    yfacing = "",
+    xfacing = 0,
+    yfacing = 0,
     gold = 0
     }
     setmetatable(obj, self)
@@ -68,22 +68,22 @@ function Player:draw()
 
     local xdrift = 0
     local ydrift = 0
-    if self.xfacing == "right" then
+    if self.xfacing == 1 then
         xdrift = self.size/2
     end
-    if self.xfacing == "left" then
+    if self.xfacing == -1 then
         xdrift = -self.size/2
     end
-    if self.xfacing == "" then
+    if self.xfacing == 0 then
         xdrift = 0
     end
-    if self.yfacing == "up" then
+    if self.yfacing == -1 then
         ydrift = -self.size/2
     end
-    if self.yfacing == "down" then
+    if self.yfacing == 1 then
         ydrift = self.size/2
     end
-    if self.yfacing == "" then
+    if self.yfacing == 0 then
         ydrift = 0
     end
 
@@ -125,22 +125,22 @@ function Player:setPlayersDirectionFacing(dx, dy)
     end
 
     if dy > 0 then
-        self.yfacing = "down"
+        self.yfacing = 1
     end
     if dy < 0 then
-        self.yfacing = "up"
+        self.yfacing = -1
     end
     if dy == 0 then
-        self.yfacing = ""
+        self.yfacing = 0
     end
     if dx > 0 then
-        self.xfacing = "right"
+        self.xfacing = 1
     end
     if dx < 0 then
-        self.xfacing = "left"
+        self.xfacing = -1
     end
     if dx == 0 then
-        self.xfacing = ""
+        self.xfacing = 0
     end
 end
 
@@ -159,4 +159,12 @@ end
 function Player:currentTileY()
     local yTile = math.floor(self.y / TILE_SIZE) + 1
     return yTile
+end
+
+function Player:getFocusX() 
+    return self:currentTileX() + self.xfacing; 
+end
+
+function Player:getFocusY() 
+    return self:currentTileY() + self.yfacing;
 end
