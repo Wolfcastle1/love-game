@@ -3,15 +3,22 @@ Player = {}
 -- x, y represents the middle of the player
 -- size represents half the width and height
 function Player:new(x, y, speed)
-    local obj = {x = x,
-    y = y,
-    speed = speed,
-    size = 20,
-    dx = 0,
-    dy = 0,
-    xfacing = 0,
-    yfacing = 0,
-    gold = 0
+    local obj = {
+        x = x,
+        y = y,
+
+        speed = speed,
+        size = 20,
+
+        dx = 0,
+        dy = 0,
+
+        xfacing = 0,
+        yfacing = 0,
+
+        gold = 0,
+
+        holding = nil
     }
     setmetatable(obj, self)
     self.__index = self
@@ -87,10 +94,11 @@ function Player:draw()
         ydrift = 0
     end
 
-
     SetColor("black")
     love.graphics.circle("fill", self.x+xdrift, self.y+ydrift, self.size/4)
     ResetColor()
+
+    Render(self.holding)
 end
 
 local LIMIT_REDUCTION = .7
@@ -167,4 +175,14 @@ end
 
 function Player:getFocusY() 
     return self:currentTileY() + self.yfacing;
+end
+
+function Player:canCarry()
+    return self.holding == nil
+end
+
+function Player:release()
+    local item = self.holding
+    self.holding = nil
+    return item
 end

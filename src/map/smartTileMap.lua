@@ -1,15 +1,23 @@
 SmartTileMap = {}
 
-function SmartTileMap:new(numMap)
+function SmartTileMap:new(numMap, fmap, player)
     local obj = {
-
+        map = ParseTileMap(numMap),
+        furnitureMap = ParseFurnitureMap(fmap),
+        -- itemMap = ParseItemMap(),
+        -- rigidMap = ParseRigidMap(),
+        player = player
     }
     setmetatable(obj, self)
     self.__index = self
     return obj
 end
 
-function ParseBasicTileMap(numMap)
+function SmartTileMap:draw() 
+    RenderSmartTileMap(self.map, self.player:currentTileX(), self.player:currentTileY(), self.player:getFocusX(), self.player:getFocusY())
+end
+
+function ParseTileMap(numMap)
 
     local tileMap = {}
 
@@ -44,6 +52,10 @@ function RenderSmartTileMap(map, currentX, currentY, focusX, focusY)
     local focusTile = map[focusY][focusX]
     Render(Tile:new(currentTile.type, currentTile.xi, currentTile.yi, true))
     Render(Tile:new(focusTile.type, focusTile.xi, focusTile.yi, false))
+end
+
+function ParseFurnitureMap(numMap)
+    return "test"
 end
 
 return SmartTileMap

@@ -8,7 +8,7 @@ require("src/util/itemUtils")
 Location = require("src/util/location")
 
 require("src/map/tile")
-require("src/map/tileMaps")
+require("src/map/static/tileMaps")
 require("src/map/smartTileMap")
 
 require("src/items/item")
@@ -33,7 +33,7 @@ local PLAYER_SPEED = 150
 
 local startingMap = Office()
 local rigidMap
-local currentMap
+local currentMap 
 
 function love.load()
 
@@ -43,9 +43,7 @@ function love.load()
     log:debug("ENABLED")
     log:trace("ENABLED")
 
-    love.window.setTitle("Sam's Sandbox")
-
-    currentMap = ParseBasicTileMap(startingMap) -- creates a 2D array of Tiles
+    love.window.setTitle("Sam's Personal Project")
 
     rigidMap = EvaluateRigidTileMap(startingMap)
 
@@ -63,6 +61,7 @@ function love.load()
         Gold:new(10, Location.new(300,300)), 
     }
 
+    currentMap = SmartTileMap:new(startingMap, "", player)
 end
 
 
@@ -89,7 +88,7 @@ end
 
 function love.draw()
 
-    RenderSmartTileMap(currentMap, player:currentTileX(), player:currentTileY(), player:getFocusX(), player:getFocusY())
+    Render(currentMap)
 
     DrawHUD()
 
@@ -108,6 +107,9 @@ function RenderList(list)
 end
 
 function Render(obj)
+    if obj == nil then 
+        return 
+    end 
     obj:draw()
 end
 

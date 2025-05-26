@@ -12,10 +12,12 @@ function Tile:new(type, xi, yi, ...)
     local args = {...}
     local debugOnly = false
     local specialTile = false
+    
     if #args == 1 then
         debugOnly = args[1]
         specialTile = true
     end
+
     local obj = {
         type = type,
         xi = xi,
@@ -23,6 +25,7 @@ function Tile:new(type, xi, yi, ...)
         debugOnly = debugOnly,
         specialTile = specialTile
     }
+    
     setmetatable(obj, self)
     self.__index = self
     return obj
