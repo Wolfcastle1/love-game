@@ -2,7 +2,6 @@ require("src/entities/player")
 
 require("src/gui/button")
 
-require("src/util/actions")
 require("src/util/utilities")
 require("src/util/colorUtils")
 require("src/util/itemUtils")
@@ -21,6 +20,7 @@ require("src/props/dynamic/table")
 require("src/props/dynamic/plate")
 
 require("src/core/log")
+require("src/core/listeners")
 
 log = log:new(3)
 
@@ -114,3 +114,7 @@ end
 function DrawHUD()
     love.graphics.print("Gold: " .. player.gold, 750, 10)
 end 
+
+function actionInput()
+    log:info("Perfoming Action: ", player.gold)
+end
