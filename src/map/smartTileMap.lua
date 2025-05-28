@@ -1,10 +1,10 @@
 SmartTileMap = {}
 
-function SmartTileMap:new(tMap, fmap, player)
+function SmartTileMap:new(tMap, fmap, iMap, player)
     local obj = {
         map = ParseVisualNumberMap(tMap, generateTile),
         furnitureMap = ParseVisualNumberMap(fmap, generateFurniture),
-        itemMap = ParseVisualNumberMap(fmap, generateItem),
+        itemMap = ParseVisualNumberMap(iMap, generateItem),
         -- itemMap = ParseItemMap(),
         -- rigidMap = ParseRigidMap(),
         player = player

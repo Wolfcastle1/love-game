@@ -20,6 +20,7 @@ require("src/items/resources/gold")
 require("src/props/prop")
 require("src/props/dynamic/table")
 require("src/props/dynamic/plate")
+require("src/props/dynamic/stool")
 
 require("src/core/log")
 require("src/core/listeners")
@@ -35,6 +36,7 @@ local PLAYER_SPEED = 150
 
 local startingMap = Office()
 local furnitureMap = OfficeFurniture()
+local itemMap = sandboxItems()
 local rigidMap
 local currentMap 
 
@@ -59,7 +61,7 @@ function love.load()
         Gold:new(10, Location.new(300,300)), 
     }
 
-    currentMap = SmartTileMap:new(startingMap, furnitureMap, player)
+    currentMap = SmartTileMap:new(startingMap, furnitureMap, itemMap, player)
 end
 
 
