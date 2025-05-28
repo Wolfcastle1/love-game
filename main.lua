@@ -50,7 +50,7 @@ function love.load()
 
     love.window.setTitle("Sam's Personal Project")
 
-    rigidMap = EvaluateRigidTileMap(startingMap)
+    rigidMap = TransformNumberMap(startingMap, generateRigidVal)
 
     SetBackground("blue")
 

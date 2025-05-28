@@ -2,9 +2,9 @@ SmartTileMap = {}
 
 function SmartTileMap:new(tMap, fmap, iMap, player)
     local obj = {
-        map = ParseVisualNumberMap(tMap, generateTile),
-        furnitureMap = ParseVisualNumberMap(fmap, generateFurniture),
-        itemMap = ParseVisualNumberMap(iMap, generateItem),
+        map = TransformNumberMap(tMap, generateTile),
+        furnitureMap = TransformNumberMap(fmap, generateFurniture),
+        itemMap = TransformNumberMap(iMap, generateItem),
         -- itemMap = ParseItemMap(),
         -- rigidMap = ParseRigidMap(),
         player = player
@@ -21,7 +21,7 @@ function SmartTileMap:draw()
     Render2Dother(self.itemMap)
 end
 
-function ParseVisualNumberMap(numMap, transformationFunction)
+function TransformNumberMap(numMap, transformationFunction)
     local map = {}
     for y = 1, #numMap do
         map[y] = {}  -- Create a new row
@@ -82,14 +82,8 @@ function Render2Dother(map)
     end
 end
 
-function EvaluateRigidTileMap(map)
-    local rMap = CloneTable(map, false)
-    for rIndex, row in ipairs(map) do
-        for cIndex, val in ipairs(row) do
-            rMap[rIndex][cIndex] = TILE_TYPE_RIGID_MAP[val]
-        end
-    end
-    return rMap
+function generateRigidVal(val)
+    return TILE_TYPE_RIGID_MAP[val]
 end
 
 function RenderRigidTileMap(rMap)
