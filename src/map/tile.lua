@@ -1,7 +1,5 @@
 Tile = {}
 
-TILE_SIZE = 50
-
 local tileColorMap = {
     grass = "green",
     wall = "grey",

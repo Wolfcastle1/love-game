@@ -31,8 +31,9 @@ local player
 local resources
 local props
 
+TILE_SIZE = 50
 DEV_TOOLS_ENABLED = true
-local PLAYER_SPEED = 150
+PLAYER_SPEED = 150
 
 local startingMap = Office()
 local furnitureMap = OfficeFurniture()
