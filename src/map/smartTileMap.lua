@@ -40,7 +40,7 @@ function ParseTileMap(numMap)
         tileMap[y] = {}  -- Create a new row
         for x = 1, #numMap[y] do
 
-            tileMap[y][x] = Tile:new(TileNumberToType(numMap[y][x]), x - 1, y - 1)
+            tileMap[y][x] = Tile:new(numMap[y][x], x - 1, y - 1)
 
         end
     end
@@ -60,8 +60,8 @@ function RenderSmartTileMap(map, currentX, currentY, focusX, focusY)
     -- render selected tile
     local currentTile = map[currentY][currentX]
     local focusTile = map[focusY][focusX]
-    Render(Tile:new(currentTile.type, currentTile.xi, currentTile.yi, true))
-    Render(Tile:new(focusTile.type, focusTile.xi, focusTile.yi, false))
+    Render(Tile:new(-1, currentTile.xi, currentTile.yi, true))
+    Render(Tile:new(-1, focusTile.xi, focusTile.yi, false))
 end
 
 function Render2D(map)
@@ -90,7 +90,7 @@ function RenderRigidTileMap(rMap)
     for rowIndex, row in ipairs(rMap) do
         for colIndex, val in ipairs(row) do
             if val and DevToolsEnabled() then
-                Render(Tile:new("Highlight", colIndex-1, rowIndex-1))
+                Render(Tile:new(-2, colIndex-1, rowIndex-1))
             end
         end
     end

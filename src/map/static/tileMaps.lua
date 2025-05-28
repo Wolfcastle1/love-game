@@ -67,7 +67,7 @@ function Office()
 end
 
 function generateTile(num, loc)
-    return Tile:new(TileNumberToType(num), loc.x, loc.y)
+    return Tile:new(num, loc.x, loc.y)
 end
 
 function TileNumberToType(num)

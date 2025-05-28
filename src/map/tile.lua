@@ -1,46 +1,23 @@
 Tile = {}
 
-local tileColorMap = {
-    grass = "green",
-    wall = "grey",
-    Highlight = "hRed",
-}
-
-function Tile:new(type, xi, yi, ...)
+function Tile:new(id, xi, yi, ...)
     local args = {...}
     local debugOnly = false
-    local specialTile = false
     
     if #args == 1 then
         debugOnly = args[1]
-        specialTile = true
     end
 
     local obj = {
-        type = type,
+        id = id,
         xi = xi,
         yi = yi, 
         debugOnly = debugOnly,
-        specialTile = specialTile
     }
     
     setmetatable(obj, self)
     self.__index = self
     return obj
-end
-
-
-function Tile:draw()
-    SetColor(tileColorMap[self.type])
-
-    love.graphics.rectangle("fill", self.xi*TILE_SIZE, self.yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
-
-    if (self.specialTile) and (not self.debugOnly or (self.debugOnly and DevToolsEnabled())) then
-        SetColor("black")
-        love.graphics.rectangle("line", self.xi*TILE_SIZE, self.yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
-        ResetColor()
-    end
-
 end
 
 function Tile:leftLimit()
@@ -56,3 +33,45 @@ function Tile:bottomLimit()
     return self.yi*TILE_SIZE + TILE_SIZE
 end
 
+
+function Tile:draw() 
+    if isPng(self.id) then 
+        drawPngTile(self.id, xi, yi)
+    else 
+        drawShapeTile(self.id, self.xi, self.yi, self.debugOnly)
+    end
+end 
+
+function isPng(id)
+    if id == 2 then return true end
+
+    return false
+end
+
+function drawPngTile(id, xi, yi)
+end
+
+function drawShapeTile(id, xi, yi, debugOnly)
+
+    if debugOnly and not DevToolsEnabled() then return end -- filter the debugOnly stuff
+
+    if id == -2 then drawColorTile("hRed", xi, yi) return end -- draw highlighted tile
+    if id == -1 then drawFocusTile(xi, yi) return end -- focus Tile
+
+    if id == 0 then drawColorTile("green", xi, yi) return end -- grass
+    if id == 1 then drawColorTile("grey", xi, yi) return end -- wall
+end
+
+function drawFocusTile(xi, yi) -- draw a focus Tile by setting ID to -1 
+    SetColor("black")
+    love.graphics.rectangle("line", xi*TILE_SIZE, yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
+    ResetColor()
+end
+
+function drawColorTile(color, xi, yi)
+    SetColor(color)
+    love.graphics.rectangle("fill", xi*TILE_SIZE, yi*TILE_SIZE, TILE_SIZE, TILE_SIZE)
+    ResetColor()
+end
+
+return Tile
