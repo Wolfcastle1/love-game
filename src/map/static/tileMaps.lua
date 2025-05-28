@@ -64,26 +64,10 @@ function Office()
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     }
-
 end
 
-
-function RenderTileMap(map)
-    for rowIndex, row in ipairs(map) do
-        for colIndex, col in ipairs(row) do
-            Render(Tile:new(TileNumberToType(col), colIndex-1, rowIndex-1))
-        end
-    end
-end
-
-function RenderRigidTileMap(rMap)
-    for rowIndex, row in ipairs(rMap) do
-        for colIndex, val in ipairs(row) do
-            if val and DevToolsEnabled() then
-                Render(Tile:new("Highlight", colIndex-1, rowIndex-1))
-            end
-        end
-    end
+function generateTile(num, loc)
+    return Tile:new(TileNumberToType(num), loc.x, loc.y)
 end
 
 function TileNumberToType(num)
@@ -98,14 +82,6 @@ TILE_TYPE_RIGID_MAP = {
     [1] = true
 }
 
-function EvaluateRigidTileMap(map)
-    local rMap = CloneTable(map, false)
-    for rIndex, row in ipairs(map) do
-        for cIndex, val in ipairs(row) do
-            rMap[rIndex][cIndex] = TILE_TYPE_RIGID_MAP[val]
-        end
-    end
-    return rMap
-end
+
 
 

@@ -10,6 +10,7 @@ Location = require("src/util/location")
 require("src/map/tile")
 require("src/map/static/tileMaps")
 require("src/map/static/furnitureMaps")
+require("src/map/static/itemMaps")
 require("src/map/smartTileMap")
 
 require("src/items/item")
@@ -92,7 +93,7 @@ function love.draw()
     -- RenderList(boundaries)
     RenderList(resources)
     RenderRigidTileMap(rigidMap)
-    
+
     player:draw()
 end
 

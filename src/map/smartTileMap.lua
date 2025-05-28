@@ -1,9 +1,10 @@
 SmartTileMap = {}
 
-function SmartTileMap:new(numMap, fmap, player)
+function SmartTileMap:new(tMap, fmap, player)
     local obj = {
-        map = ParseTileMap(numMap),
-        furnitureMap = ParseFurnitureMap(fmap),
+        map = ParseVisualNumberMap(tMap, generateTile),
+        furnitureMap = ParseVisualNumberMap(fmap, generateFurniture),
+        itemMap = ParseVisualNumberMap(fmap, generateItem),
         -- itemMap = ParseItemMap(),
         -- rigidMap = ParseRigidMap(),
         player = player
@@ -17,6 +18,18 @@ function SmartTileMap:draw()
     RenderSmartTileMap(self.map, self.player:currentTileX(), self.player:currentTileY(), self.player:getFocusX(), self.player:getFocusY())
     Render(self.furnitureMap[4][9])
     Render2Dother(self.furnitureMap)
+    Render2Dother(self.itemMap)
+end
+
+function ParseVisualNumberMap(numMap, transformationFunction)
+    local map = {}
+    for y = 1, #numMap do
+        map[y] = {}  -- Create a new row
+        for x = 1, #numMap[y] do
+            map[y][x] = transformationFunction(numMap[y][x], Location.new(x - 1, y - 1))
+        end
+    end
+    return map
 end
 
 function ParseTileMap(numMap)
@@ -34,21 +47,6 @@ function ParseTileMap(numMap)
 
     return tileMap
 
-end
-
-function ParseFurnitureMap(numMap)
-    local fmap = {} 
-
-    for y = 1, #numMap do
-        fmap[y] = {} 
-        for x = 1, #numMap[y] do
-
-            fmap[y][x] = generateFurniture(numMap[y][x], Location.new(x - 1, y - 1))
-            
-        end 
-    end
-    log:info("row 2,5 ", #fmap[2])
-    return fmap
 end
 
 function RenderSmartTileMap(map, currentX, currentY, focusX, focusY)
@@ -80,6 +78,26 @@ function Render2Dother(map)
         -- log:info("Render List row ", #row)
         for colIndex, item in pairs(row) do
             Render(item)
+        end
+    end
+end
+
+function EvaluateRigidTileMap(map)
+    local rMap = CloneTable(map, false)
+    for rIndex, row in ipairs(map) do
+        for cIndex, val in ipairs(row) do
+            rMap[rIndex][cIndex] = TILE_TYPE_RIGID_MAP[val]
+        end
+    end
+    return rMap
+end
+
+function RenderRigidTileMap(rMap)
+    for rowIndex, row in ipairs(rMap) do
+        for colIndex, val in ipairs(row) do
+            if val and DevToolsEnabled() then
+                Render(Tile:new("Highlight", colIndex-1, rowIndex-1))
+            end
         end
     end
 end
