@@ -9,6 +9,7 @@ Location = require("src/util/location")
 
 require("src/map/tile")
 require("src/map/static/tileMaps")
+require("src/map/static/furnitureMaps")
 require("src/map/smartTileMap")
 
 require("src/items/item")
@@ -32,6 +33,7 @@ DEV_TOOLS_ENABLED = true
 local PLAYER_SPEED = 150
 
 local startingMap = Office()
+local furnitureMap = OfficeFurniture()
 local rigidMap
 local currentMap 
 
@@ -52,16 +54,11 @@ function love.load()
 
     player = Player:new(150, 150, PLAYER_SPEED)
 
-    props = {
-        Plate:new(Location.new(5,5), "small"),
-        Table:new(Location.new(3,3)),
-    }
-
     resources = { 
         Gold:new(10, Location.new(300,300)), 
     }
 
-    currentMap = SmartTileMap:new(startingMap, "", player)
+    currentMap = SmartTileMap:new(startingMap, furnitureMap, player)
 end
 
 
@@ -95,8 +92,7 @@ function love.draw()
     -- RenderList(boundaries)
     RenderList(resources)
     RenderRigidTileMap(rigidMap)
-    RenderList(props)
-
+    
     player:draw()
 end
 

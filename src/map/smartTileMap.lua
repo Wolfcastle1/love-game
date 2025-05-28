@@ -15,6 +15,8 @@ end
 
 function SmartTileMap:draw() 
     RenderSmartTileMap(self.map, self.player:currentTileX(), self.player:currentTileY(), self.player:getFocusX(), self.player:getFocusY())
+    Render(self.furnitureMap[4][9])
+    Render2Dother(self.furnitureMap)
 end
 
 function ParseTileMap(numMap)
@@ -34,14 +36,24 @@ function ParseTileMap(numMap)
 
 end
 
+function ParseFurnitureMap(numMap)
+    local fmap = {} 
+
+    for y = 1, #numMap do
+        fmap[y] = {} 
+        for x = 1, #numMap[y] do
+
+            fmap[y][x] = generateFurniture(numMap[y][x], Location.new(x - 1, y - 1))
+            
+        end 
+    end
+    log:info("row 2,5 ", #fmap[2])
+    return fmap
+end
+
 function RenderSmartTileMap(map, currentX, currentY, focusX, focusY)
 
-    for rowIndex, row in ipairs(map) do
-        for colIndex, col in ipairs(row) do
-            local selectedTile = map[rowIndex][colIndex]
-            Render(selectedTile)
-        end
-    end
+    Render2D(map)
 
     log:trace("focusX ", focusX)
     log:trace("focusY ", focusY)
@@ -54,8 +66,22 @@ function RenderSmartTileMap(map, currentX, currentY, focusX, focusY)
     Render(Tile:new(focusTile.type, focusTile.xi, focusTile.yi, false))
 end
 
-function ParseFurnitureMap(numMap)
-    return "test"
+function Render2D(map)
+    for rowIndex, row in ipairs(map) do
+        for colIndex, item in ipairs(row) do
+            Render(item)
+        end
+    end
+end
+
+function Render2Dother(map)
+    -- log:info("Render 2D ", #map)
+    for rowIndex, row in pairs(map) do
+        -- log:info("Render List row ", #row)
+        for colIndex, item in pairs(row) do
+            Render(item)
+        end
+    end
 end
 
 return SmartTileMap
