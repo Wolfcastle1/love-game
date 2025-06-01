@@ -8,7 +8,7 @@ function Player:new(x, y, speed)
         y = y,
 
         speed = speed,
-        size = 20,
+        size = TILE_SIZE/2 * (4/5),
 
         dx = 0,
         dy = 0,

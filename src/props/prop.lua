@@ -29,8 +29,8 @@ end
 function Prop:draw()
     love.graphics.draw(
         self.image, 
-        self.location.x*TILE_SIZE - TILE_SIZE/2,
-        self.location.y*TILE_SIZE - TILE_SIZE/2, 
+        self.location.x*TILE_SIZE + TILE_SIZE/2,
+        self.location.y*TILE_SIZE + TILE_SIZE/2, 
         math.rad(self:rotationDegree()), 
         self.scale, self.scale, 
         self.image:getWidth()/2, self.image:getHeight()/2

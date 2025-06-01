@@ -1,9 +1,19 @@
 Tile = {}
 
+local imageArray = {
+    [2] = love.graphics.newImage("src/assets/tiles/bwTile.png"), 
+}
+
+for _, img in pairs(imageArray) do 
+    img:setFilter("nearest", "nearest")
+end
+
 function Tile:new(id, xi, yi, ...)
     local args = {...}
     local debugOnly = false
     
+    local pullTileImage
+
     if #args == 1 then
         debugOnly = args[1]
     end
@@ -35,31 +45,34 @@ end
 
 
 function Tile:draw() 
-    if isPng(self.id) then 
-        drawPngTile(self.id, xi, yi)
-    else 
-        drawShapeTile(self.id, self.xi, self.yi, self.debugOnly)
-    end
-end 
+    local id = self.id 
+    local xi = self.xi 
+    local yi = self.yi 
 
-function isPng(id)
-    if id == 2 then return true end
-
-    return false
-end
-
-function drawPngTile(id, xi, yi)
-end
-
-function drawShapeTile(id, xi, yi, debugOnly)
-
-    if debugOnly and not DevToolsEnabled() then return end -- filter the debugOnly stuff
+    if self.debugOnly and not DevToolsEnabled() then return end -- filter the debugOnly stuff
 
     if id == -2 then drawColorTile("hRed", xi, yi) return end -- draw highlighted tile
     if id == -1 then drawFocusTile(xi, yi) return end -- focus Tile
 
     if id == 0 then drawColorTile("green", xi, yi) return end -- grass
     if id == 1 then drawColorTile("grey", xi, yi) return end -- wall
+    if id == 2 then drawPngTile(id, xi, yi) return end -- Black and white kitchen tile
+end 
+
+function drawPngTile(id, xi, yi) 
+    local img = imageArray[id]
+    local imgWidth = img:getWidth()
+    local imgHeight = img:getHeight()
+    local scale = TILE_SIZE / imgWidth
+
+    love.graphics.draw(
+        img,
+        xi*TILE_SIZE + TILE_SIZE/2,
+        yi*TILE_SIZE + TILE_SIZE/2,
+        0,
+        scale, scale,
+        imgWidth/2, imgHeight/2
+    )
 end
 
 function drawFocusTile(xi, yi) -- draw a focus Tile by setting ID to -1 

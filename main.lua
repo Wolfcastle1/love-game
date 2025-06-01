@@ -21,6 +21,7 @@ require("src/props/prop")
 require("src/props/dynamic/table")
 require("src/props/dynamic/plate")
 require("src/props/dynamic/stool")
+require("src/props/dynamic/phones")
 
 require("src/core/log")
 require("src/core/listeners")
