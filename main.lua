@@ -125,5 +125,20 @@ function DrawHUD()
 end 
 
 function actionInput()
-    log:info("Perfoming Action: ", player.gold)
+    
+    local subjectLocation = Location.new(player:getFocusX(), player:getFocusY())
+    log:debug("Perfoming Action on tile: (" .. subjectLocation.x, "," .. subjectLocation.y .. ")")
+
+    local subjectTile = currentMap.map[subjectLocation.y][subjectLocation.x]
+    log:debug("Tile ID: " .. subjectTile.id) 
+    
+    local subjectFurniture = currentMap.furnitureMap[subjectLocation.y][subjectLocation.x]
+    if subjectFurniture ~= nil then 
+        log:debug("Furniture ID: " .. subjectFurniture.type) 
+    end
+    
+    local subjectItem = currentMap.itemMap[subjectLocation.y][subjectLocation.x]
+    if subjectItem ~= nil then 
+        log:debug("Item ID: " .. subjectItem.type) 
+    end
 end
