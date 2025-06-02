@@ -1,10 +1,7 @@
 Prop = {} 
 
-function Prop:new(type, location, rotation, imageName)
-    local img = love.graphics.newImage("src/assets/props/".. imageName .. ".png")
-    img:setFilter("nearest", "nearest")
+function Prop:new(type, location, rotation, img)    
     local scale = TILE_SIZE / img:getWidth()
-
 
     local obj = {
         type = type,
@@ -35,6 +32,12 @@ function Prop:draw()
         self.scale, self.scale, 
         self.image:getWidth()/2, self.image:getHeight()/2
     )
+end
+
+function buildImage(imageName)
+    local img = love.graphics.newImage("src/assets/props/".. imageName .. ".png")
+    img:setFilter("nearest", "nearest")
+    return img
 end
 
 

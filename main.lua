@@ -134,11 +134,16 @@ function actionInput()
     
     local subjectFurniture = currentMap.furnitureMap[subjectLocation.y][subjectLocation.x]
     if subjectFurniture ~= nil then 
+
         log:debug("Furniture ID: " .. subjectFurniture.type) 
     end
     
     local subjectItem = currentMap.itemMap[subjectLocation.y][subjectLocation.x]
     if subjectItem ~= nil then 
+        if subjectItem.type == "Phones" then 
+            currentMap.itemMap[subjectLocation.y][subjectLocation.x] = Phones:new(subjectItem.location, 3)
+        end
         log:debug("Item ID: " .. subjectItem.type) 
     end
+
 end
