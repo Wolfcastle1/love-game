@@ -36,6 +36,8 @@ TILE_SIZE = 50
 DEV_TOOLS_ENABLED = true
 PLAYER_SPEED = 150
 
+CAMERA = {x = 0, y = 0}
+
 local startingMap = Office()
 local furnitureMap = OfficeFurniture()
 local itemMap = sandboxItems()
@@ -89,7 +91,9 @@ end
 
 
 function love.draw()
-
+    love.graphics.push() 
+    love.graphics.translate(-CAMERA.x, -CAMERA.y)
+    
     Render(currentMap)
 
     DrawHUD()
@@ -99,6 +103,7 @@ function love.draw()
     RenderRigidTileMap(rigidMap)
 
     player:draw()
+    love.graphics.pop()
 end
 
 function RenderList(list)
