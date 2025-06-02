@@ -59,6 +59,11 @@ function Tile:draw()
     if id == 2 then drawPngTile(id, xi, yi) return end -- Black and white kitchen tile
 end 
 
+function Tile:generateRigidRect()
+    local rigidRect = {self:topLimit(), self:rightLimit(), self:bottomLimit(), self:leftLimit()}
+    return rigidRect;
+end
+
 function drawPngTile(id, xi, yi) 
     local img = imageArray[id]
     local imgWidth = img:getWidth()

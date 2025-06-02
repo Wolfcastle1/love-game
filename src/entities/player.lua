@@ -25,7 +25,9 @@ function Player:new(x, y, speed)
     return obj
 end
 
-function Player:update(dt, rMap)
+function Player:update(dt, rigidRectList)
+
+    -- log:info("Rigid Rect List size: " .. #rigidRectList)
 
     local dx = 0
     local dy = 0
@@ -44,11 +46,11 @@ function Player:update(dt, rMap)
         dy = dy + self.speed*dt
     end
 
-    if canMakeMovement(rMap, self.x+dx, self.y) then
+    if canMakeMovement(rigidRectList, self.x+dx, self.y) then
         MoveX(self, dx)
     end
 
-    if canMakeMovement(rMap, self.x, self.y+dy) then
+    if canMakeMovement(rigidRectList, self.x, self.y+dy) then
         MoveY(self, dy)
     end
 

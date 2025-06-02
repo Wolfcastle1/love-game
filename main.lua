@@ -12,6 +12,7 @@ require("src/map/static/tileMaps")
 require("src/map/static/furnitureMaps")
 require("src/map/static/itemMaps")
 require("src/map/smartTileMap")
+require("src/map/rigidUtils")
 
 require("src/items/item")
 require("src/items/resources/resource")
@@ -42,6 +43,7 @@ local startingMap = Office()
 local furnitureMap = OfficeFurniture()
 local itemMap = sandboxItems()
 local rigidMap
+local rigidRectList
 local currentMap 
 
 function love.load()
@@ -54,26 +56,25 @@ function love.load()
 
     love.window.setTitle("Sam's Personal Project")
 
-    rigidMap = TransformNumberMap(startingMap, generateRigidVal)
-
+    rigidMap = TransformNumberMap(startingMap, isTileIdRigid)
+    
     SetBackground("blue")
-
-
+    
     player = Player:new(150, 150, PLAYER_SPEED)
-
+    
     resources = { 
         Gold:new(10, Location.new(300,300)), 
     }
-
+    
     currentMap = SmartTileMap:new(startingMap, furnitureMap, itemMap, player)
+    rigidRectList = generateRigidListFromSmartTileMap(currentMap)
 end
 
 
 function love.update(dt)
 
     -- player obj
-    player:update(dt, rigidMap)
-
+    player:update(dt, rigidRectList)
 
     if #resources < 1 then 
         table.insert(resources, Gold:new(10, Location.new(500,500)))
@@ -93,7 +94,7 @@ end
 function love.draw()
     love.graphics.push() 
     love.graphics.translate(-CAMERA.x, -CAMERA.y)
-    
+
     Render(currentMap)
 
     DrawHUD()

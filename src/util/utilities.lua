@@ -66,30 +66,25 @@ function ShowRectEdges(rigidRect, color)
     ResetColor()
 end
 
-function canMakeMovement(rigidTileMap, newX, newY)
-
-    -- loop through all tiles in rigidMap
-    for i, row in ipairs(rigidTileMap) do
-        for j, val in ipairs(row) do
-
-            -- is the tile rigid? Will the player intersect it?
-            if val and doesSubjectIntersectTile(Tile:new(0, j-1, i-1), Player:new(newX, newY, 0)) then
-                return false -- dont allow the movement
-            end
-
+function canMakeMovement(rigidRectList, newX, newY)
+    -- for each rigid Shape 
+    for i, rigidShape in ipairs(rigidRectList) do
+        -- Will the player intersect the rectangle
+        if doesSubjectIntersectRect(Player:new(newX, newY, 0), rigidShape) then
+            return false -- dont allow the movement
         end
     end
-
     return true -- allow the movement
-
 end
 
-function doesSubjectIntersectTile(tile, subject)
-    local leftBetween = subject:leftLimit() > tile:leftLimit() and subject:leftLimit() < tile:rightLimit()
-    local rightBetween = subject:rightLimit() > tile:leftLimit() and subject:rightLimit() < tile:rightLimit()
-    local topBetween = subject:topLimit() > tile:topLimit() and subject:topLimit() < tile:bottomLimit()
-    local bottomBetween = subject:bottomLimit() > tile:topLimit() and subject:bottomLimit() < tile:bottomLimit()
-
+function doesSubjectIntersectRect(subject, rect)
+    
+    local topBetween = subject:topLimit() > rect[1] and subject:topLimit() < rect[3]
+    local bottomBetween = subject:bottomLimit() > rect[1] and subject:bottomLimit() < rect[3]
+    
+    local rightBetween = subject:rightLimit() > rect[4] and subject:rightLimit() < rect[2]
+    local leftBetween = subject:leftLimit() > rect[4] and subject:leftLimit() < rect[2]
+    
     if (leftBetween or rightBetween) and (topBetween or bottomBetween) then
         return true
     end

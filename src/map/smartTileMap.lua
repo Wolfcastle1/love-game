@@ -82,8 +82,8 @@ function Render2Dother(map)
     end
 end
 
-function generateRigidVal(val)
-    return TILE_TYPE_RIGID_MAP[val]
+function isTileIdRigid(id)
+    return TILE_TYPE_RIGID_MAP[id]
 end
 
 function RenderRigidTileMap(rMap)
