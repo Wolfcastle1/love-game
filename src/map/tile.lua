@@ -2,6 +2,7 @@ Tile = {}
 
 local imageArray = {
     [2] = love.graphics.newImage("src/assets/tiles/bwTile.png"), 
+    [3] = love.graphics.newImage("src/assets/tiles/dw_floor.png"),
 }
 
 for _, img in pairs(imageArray) do 
@@ -57,6 +58,7 @@ function Tile:draw()
     if id == 0 then drawColorTile("green", xi, yi) return end -- grass
     if id == 1 then drawColorTile("grey", xi, yi) return end -- wall
     if id == 2 then drawPngTile(id, xi, yi) return end -- Black and white kitchen tile
+    if id == 3 then drawPngTile(id, xi, yi) return end -- dark wood floor tile
 end 
 
 function Tile:generateRigidRect()

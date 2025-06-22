@@ -33,7 +33,7 @@ local player
 local resources
 local props
 
-TILE_SIZE = 50
+TILE_SIZE = 64
 DEV_TOOLS_ENABLED = true
 PLAYER_SPEED = 150
 
